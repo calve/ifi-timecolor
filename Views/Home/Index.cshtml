@@ -1,0 +1,37 @@
+﻿@using MvcSample.Web.Models
+@model Timecolor
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Love time";
+}
+<style>
+      body {
+          text-align: center;
+          color: white;
+          background-color: @Model.Hexcolor;
+      }
+      #timer {
+          font-size:50pt;
+      }
+      #hexcolor {
+          font-size:20pt;
+      }
+</style>
+<div id="timer">
+  @Model.Datetime.ToString("HH:MM:ss")
+</div>
+<div id="hexcolor">
+  @Model.Hexcolor
+</div>
+<script>
+ window.history.pushState('', '', '/?timestamp=@Model.Timestamp');
+ window.setTimeout(function(){
+     $.ajax({
+         url: "",
+         context: document.body,
+         success: function(s,x){
+             $(this).html(s);
+         }
+     });
+ }, 1000);
+</script>
